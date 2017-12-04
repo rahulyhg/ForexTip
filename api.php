@@ -66,6 +66,7 @@ foreach ($top20TipByCurrentcy as $currency => $type) {
             $price += ($t['price'] * $t['lot']);
             if ($t['digit'] == 10000) $digit = 5;
         }
+        if ($lot < 1) continue;
         $price /= $lot;
         $tmp = [];
         $tmp['lot'] = $lot;
