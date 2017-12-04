@@ -67,10 +67,11 @@ foreach ($top20TipByCurrentcy as $currency => $type) {
             if ($t['digit'] == 10000) $digit = 5;
         }
         $price /= $lot;
+        $tmp = [];
         $tmp['lot'] = $lot;
         $tmp['price'] = number_format($price, $digit);
         $result[$currency][$index] = $tmp;
     }
 }
-
+header('Content-Type: application/json');
 print json_encode($result);
