@@ -29,25 +29,12 @@ function getDataFromId($id)
         @$tmp['stdLotds'] = $data->stdLotds;
         @$tmp['tradeType'] = $data->tradeType;
         @$tmp['entryRate'] = $data->entryRate;
+        @$tmp['currentRate'] = $data->currentRate;
+        @$tmp['floatingPips'] = $data->floatingPips;
         @$tmp['pipMultiplier'] = $data->pipMultiplier;
         $returnArray[] = $tmp;
     }
 
-    return $returnArray;
-}
-
-function getCurrentPrice($listCurrency)
-{
-    $listCurrency = implode(',', $listCurrency);
-    $priceObj = RestCurl::get('https://forex.1forge.com/1.0.2/quotes?pairs=' . $listCurrency . '&api_key=Jf3MVdUSbaHCVy1Tn9EFMAUdkosZhbJj');
-    $returnArray = [];
-    foreach ($priceObj['data'] as $d) {
-        $tmp['price'] = $d->price;
-        $tmp['bid'] = $d->bid;
-        $tmp['ask'] = $d->ask;
-        $tmp['timestamp'] = $d->timestamp;
-        $returnArray[$d->symbol] = $tmp;
-    }
     return $returnArray;
 }
 
@@ -61,54 +48,12 @@ foreach ($IdArray as $Id) {
 }
 $top20TipByCurrentcy = [];
 foreach ($top20Tip as $currentcy => $data) {
-    foreach ($data as $type => $d) {
-        if (((time() * 1000) - $d['dateTime']) > (5 * 24 * 60 * 60 * 1000)) continue;
-        $tmp['lot'] = $d['stdLotds'];
-        $tmp['price'] = $d['entryRate'];
-        $tmp['type'] = $d['tradeType'];
-        $tmp['digit'] = $d['pipMultiplier'];
-        $top20TipByCurrentcy[$d['currency']][$d['tradeType']][$type] = $tmp;
+    foreach ($data as $d) {
+        $top20TipByCurrentcy[$d['currency']][] = $d;
+        sort($top20TipByCurrentcy[$d['currency']]);
     }
 }
-
-$result = [];
-$listCurrency = [];
-foreach ($top20TipByCurrentcy as $currency => $data) {
-    $currency = str_replace('/', '', $currency);
-    $listCurrency[] = $currency;
-}
-$currentPriceArray = getCurrentPrice($listCurrency);
-foreach ($top20TipByCurrentcy as $currency => $data) {
-    $currency = str_replace('/', '', $currency);
-    foreach ($data as $type => $d) {
-        $lot = 0;
-        $price = 0;
-        $digit = 3;
-        $multiPip = 0;
-        $type = '';
-        foreach ($d as $t) {
-            $type = $t['type'];
-            $lot += $t['lot'];
-            $price += ($t['price'] * $t['lot']);
-            $multiPip = $t['digit'];
-            if ($t['digit'] == 10000) $digit = 5;
-        }
-        if ($lot < 1) continue;
-        $price /= $lot;
-        $tmp = [];
-        $tmp['type'] = $type;
-        $tmp['lot'] = $lot;
-        $tmp['openPrice'] = number_format($price, $digit);
-        $tmp['currentPrice'] = number_format($currentPriceArray[$currency]['price'], $digit);
-        $tmp['floating'] = number_format(($tmp['currentPrice'] - $tmp['openPrice']) * $multiPip, 1);
-        $result[$currency][] = $tmp;
-    }
-}
-print json_encode($result);
-die;
-die;
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -131,6 +76,7 @@ die;
             print '<tr>';
             print '<th>Symbol</th>';
             print '<th>Type</th>';
+            print '<th>Time</th>';
             print '<th>Lot</th>';
             print '<th>Open Price</th>';
             print '<th>Curren Price</th>';
@@ -138,9 +84,9 @@ die;
             print '</tr>';
             print '</thead>';
             print '<tbody>';
-            foreach ($result as $currency => $data) {
+            foreach ($top20TipByCurrentcy as $currentcy => $data) {
                 $tmp = 0;
-                foreach ($data as $data => $d) {
+                foreach ($data as $d) {
                     if (((time() * 1000) - $d['dateTime']) > (5 * 24 * 60 * 60 * 1000)) continue;
                     $tmp++;
                     $digit = ($d['pipMultiplier'] == 10000) ? 5 : 3;
