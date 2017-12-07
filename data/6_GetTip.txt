@@ -1,0 +1,1 @@
+{"currency":"EURUSD","tradeType":"BUY","stdLotds":7.1,"entryRate":1.18451,"currentPrice":1.18045,"floatingPips":"-40.6"}

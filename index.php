@@ -10,7 +10,6 @@ function getTop20Id()
     $top20IdArray = [];
     foreach ($top20Data as $d) {
         $tmp['id'] = ($d->trader->providerId);
-        $tmp['name'] = ($d->trader->profile->name);
         $top20IdArray[] = $tmp;
     }
 
@@ -91,11 +90,14 @@ function zipDataByCurrency()
                 $totalPriceByType += ($order['stdLotds'] * $order['entryRate']);
                 $pipMultiplier = $order['pipMultiplier'];
             }
+            if ($totalLotByType < 1) continue;
             $averagePrice = ($totalPriceByType / $totalLotByType);
             $averagePrice = number_format($averagePrice, strlen($pipMultiplier));
             $floatingPips = ($currentPrice[$currency]['price'] - $averagePrice) * $pipMultiplier;
             $floatingPips = ($type == 'BUY') ? $floatingPips : $floatingPips * -1;
             $floatingPips = number_format($floatingPips, 1);
+            $tmp['currency'] = $currency;
+            $tmp['tradeType'] = $type;
             $tmp['stdLotds'] = $totalLotByType;
             $tmp['entryRate'] = (float)$averagePrice;
             $tmp['currentPrice'] = $currentPrice[$currency]['price'];
