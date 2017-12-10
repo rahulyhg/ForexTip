@@ -45,7 +45,8 @@ function formatDataByCurrency()
   $listCurrency = [];
   $returnArray = [];
   foreach ($top20Data as $index => $data) {
-    if (((time() * 1000) - $data['dateTime']) > (5 * 24 * 60 * 60 * 1000)) continue;
+    $day = $_GET['day'] ? $_GET['day'] : 5;
+    if (((time() * 1000) - $data['dateTime']) > ($day * 24 * 60 * 60 * 1000)) continue;
     $currency = str_replace('/', '', $data['currency']);
     $listCurrency[$currency] = true;
     $tmp = [];
