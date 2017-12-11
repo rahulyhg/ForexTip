@@ -64,7 +64,12 @@ function getCurrentPrice()
 {
   $listCurrency = json_decode(file_get_contents('data/2_ListCurrency.txt'), true);
   $listCurrency = implode(',', $listCurrency);
-  $priceObj = RestCurl::get('https://forex.1forge.com/1.0.2/quotes?pairs=' . $listCurrency . '&api_key=Jf3MVdUSbaHCVy1Tn9EFMAUdkosZhbJj');
+  if (rand(0, 1)) {
+    $apiKey = 'oaKms1onINj6VoYXYGKYgAUdYYKDnhyA';
+  } else {
+    $apiKey = 'Jf3MVdUSbaHCVy1Tn9EFMAUdkosZhbJj';
+  }
+  $priceObj = RestCurl::get('https://forex.1forge.com/1.0.2/quotes?pairs=' . $listCurrency . '&api_key=' . $apiKey);
   $returnArray = [];
   foreach ($priceObj['data'] as $d) {
     $tmp['price'] = $d->price;
@@ -131,6 +136,7 @@ function getTip()
 
 if (isset($_REQUEST['numOfOrder'])) {
   file_put_contents('data/7_NumOfOrder.txt', $_REQUEST['numOfOrder']);
+  exit;
 }
 $numOfOrder = file_get_contents('data/7_NumOfOrder.txt');
 getTop20Id();
@@ -196,16 +202,17 @@ $getTip = json_decode(file_get_contents('data/6_GetTip.txt'), true);
           print "</tr>";
         }
       }
+      $style = $numOfOrder ? '' : 'style="background: black"';
       print "<tr>";
       print "<th colspan='7' style='text-align:center; vertical-align:middle;'>Tip - " . $numOfOrder . "</th>";
       print "</tr>";
       print '<tr class="warning">';
-      print '<td>' . $getTip['currency'] . '</td>';
-      print '<td>' . $getTip['tradeType'] . '</td>';
-      print '<td>' . $getTip['stdLotds'] . '</td>';
-      print '<td>' . $getTip['entryRate'] . '</td>';
-      print '<td>' . $getTip['currentPrice'] . '</td>';
-      print '<td>' . $getTip['floatingPips'] . '</td>';
+      print '<td ' . $style .'>' . $getTip['currency'] . '</td>';
+      print '<td ' . $style .'>' . $getTip['tradeType'] . '</td>';
+      print '<td ' . $style .'>' . $getTip['stdLotds'] . '</td>';
+      print '<td ' . $style .'>' . $getTip['entryRate'] . '</td>';
+      print '<td ' . $style .'>' . $getTip['currentPrice'] . '</td>';
+      print '<td ' . $style .'>' . $getTip['floatingPips'] . '</td>';
       print '</tr>';
       print "</tbody>";
       print "</table>";
