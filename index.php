@@ -130,9 +130,9 @@ function getTip()
 }
 
 if (isset($_REQUEST['numOfOrder'])) {
-  file_put_contents('data/7_NumOfOrder.txt', json_encode($_REQUEST['numOfOrder']));
+  file_put_contents('data/7_NumOfOrder.txt', $_REQUEST['numOfOrder']);
 }
-$numOfOrder = json_decode(file_get_contents('data/7_NumOfOrder.txt'), true);
+$numOfOrder = file_get_contents('data/7_NumOfOrder.txt');
 getTop20Id();
 getDataFromId();
 formatDataByCurrency();
@@ -197,7 +197,7 @@ $getTip = json_decode(file_get_contents('data/6_GetTip.txt'), true);
         }
       }
       print "<tr>";
-      print "<th colspan='7' style='text-align:center; vertical-align:middle;'>Tip - $numOfOrder</th>";
+      print "<th colspan='7' style='text-align:center; vertical-align:middle;'>Tip - " . $numOfOrder . "</th>";
       print "</tr>";
       print '<tr class="warning">';
       print '<td>' . $getTip['currency'] . '</td>';
