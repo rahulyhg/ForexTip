@@ -1,8 +1,8 @@
 <?PHP
-function sendMessage()
+function sendMessage($numOfOrder)
 {
   $content = array(
-    "en" => 'English Message'
+    "en" => "Num Of Order: $numOfOrder"
   );
 
   $fields = array(
@@ -32,7 +32,8 @@ function sendMessage()
   return $response;
 }
 
-$response = sendMessage();
+$numOfOrder = $_REQUEST['numOfOrder'] ? $_REQUEST['numOfOrder'] : 0;
+$response = sendMessage($numOfOrder);
 $return["allresponses"] = $response;
 $return = json_encode($return);
 

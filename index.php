@@ -37,8 +37,9 @@ $getTip = json_decode(file_get_contents('data/6_GetTip.txt'), true);
           appId: "0e1b1aab-51f7-473c-96fc-fe1e5ccd6b15",
           autoRegister: true,
           notifyButton: {
-              enable: true /* Set to false to hide */
-          }
+              enable: false
+          },
+          persistNotification: false
       }]);
   </script>
 </head>
