@@ -83,17 +83,16 @@ $getTip = json_decode(file_get_contents('data/6_GetTip.txt'), true);
           print "</tr>";
         }
       }
-      $style = ($numOfOrder) ? 'style="background: black"' : '';
       print "<tr>";
-      print "<th colspan='7' style='text-align:center; vertical-align:middle;'>Tip - " . $numOfOrder . "</th>";
+      print "<th colspan='7' style='text-align:center; vertical-align:middle;'>Tip - Num Of Order: " . $numOfOrder . "</th>";
       print "</tr>";
       print '<tr class="warning">';
-      print '<td ' . $style . '>' . $getTip['currency'] . '</td>';
-      print '<td ' . $style . '>' . $getTip['tradeType'] . '</td>';
-      print '<td ' . $style . '>' . $getTip['stdLotds'] . '</td>';
-      print '<td ' . $style . '>' . $getTip['entryRate'] . '</td>';
-      print '<td ' . $style . '>' . $getTip['currentPrice'] . '</td>';
-      print '<td ' . $style . '>' . $getTip['floatingPips'] . '</td>';
+      print '<td>' . $getTip['currency'] . '</td>';
+      print '<td>' . $getTip['tradeType'] . '</td>';
+      print '<td>' . $getTip['stdLotds'] . '</td>';
+      print '<td>' . $getTip['entryRate'] . '</td>';
+      print '<td>' . $getTip['currentPrice'] . '</td>';
+      print '<td>' . $getTip['floatingPips'] . '</td>';
       print '</tr>';
       print "</tbody>";
       print "</table>";

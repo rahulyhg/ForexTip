@@ -1,8 +1,10 @@
 <?PHP
 function sendMessage($numOfOrder)
 {
+  $getTip = json_decode(file_get_contents('data/6_GetTip.txt'), true);
+  $msg = "Num Of Order: $numOfOrder, <br>{$getTip['currency']} - {$getTip['tradeType']} - {$getTip['stdLotds']} Lot - {$getTip['floatingPips']} Pips<br>Entry Price: {$getTip['entryRate']} - Current Price: {$getTip['currentPrice']}";
   $content = array(
-    "en" => "Num Of Order: $numOfOrder"
+    "en" => $msg
   );
 
   $fields = array(
