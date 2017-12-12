@@ -69,7 +69,12 @@ function getCurrentPrice()
   $apiKey[] = 'ClrMRVp0f9n1tqDHyvhxYerwU1U248UZ';
   $apiKey[] = 'aGacuvy68EAezgTPio45GGdn0b0e0sit';
   $apiKey[] = '1lJcTFrdrR7IWW4YWsWUovGq1gtE72Jl';
-  $index = rand(0, 4);
+  $apiKey[] = 'a5iuTDnIXCyM9VSmKsRJfofOC1Hnlo0S';
+  $apiKey[] = 'tbjwLNRUXWWTtplPqXgiNNdElXPRr15Y';
+  $apiKey[] = 'eBnQGyYnBlSgCZXqUx52EANWfbOnrrbz';
+  $apiKey[] = 'OIXsKdMvzL4E38v101txYz9GBbKqZQ25';
+  $apiKey[] = 'pyJlh4mq3p6SwG2Oo7EAcgVEb9muLU8s';
+  $index = rand(0, 9);
   $priceObj = RestCurl::get('https://forex.1forge.com/1.0.2/quotes?pairs=' . $listCurrency . '&api_key=' . $apiKey[$index]);
   $returnArray = [];
   foreach ($priceObj['data'] as $d) {
