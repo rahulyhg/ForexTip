@@ -135,7 +135,8 @@ function getTip()
 }
 
 if (isset($_REQUEST['numOfOrder'])) {
-  file_put_contents('data/7_NumOfOrder.txt', $_REQUEST['numOfOrder']);
+  $tmp = $_REQUEST['numOfOrder'] ? $_REQUEST['numOfOrder'] : 0;
+  file_put_contents('data/7_NumOfOrder.txt', $tmp);
   exit;
 }
 $numOfOrder = file_get_contents('data/7_NumOfOrder.txt');
