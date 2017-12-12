@@ -35,7 +35,7 @@ $getTip = json_decode(file_get_contents('data/6_GetTip.txt'), true);
       var OneSignal = window.OneSignal || [];
       OneSignal.push(["init", {
           appId: "0e1b1aab-51f7-473c-96fc-fe1e5ccd6b15",
-          autoRegister: false,
+          autoRegister: true,
           notifyButton: {
               enable: true /* Set to false to hide */
           }
