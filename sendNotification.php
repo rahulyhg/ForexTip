@@ -2,7 +2,7 @@
 function sendMessage($numOfOrder)
 {
   $getTip = json_decode(file_get_contents('data/6_GetTip.txt'), true);
-  $msg = "Num Of Order: $numOfOrder, <br>{$getTip['currency']} - {$getTip['tradeType']} - {$getTip['stdLotds']} Lot - {$getTip['floatingPips']} Pips<br>Entry Price: {$getTip['entryRate']} - Current Price: {$getTip['currentPrice']}";
+  $msg = "Num Of Order: $numOfOrder, \n{$getTip['currency']} - {$getTip['tradeType']} - {$getTip['stdLotds']} Lot - {$getTip['floatingPips']} Pips\nEntry Price: {$getTip['entryRate']} - Current Price: {$getTip['currentPrice']}";
   $content = array(
     "en" => $msg
   );
