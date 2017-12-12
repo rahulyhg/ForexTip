@@ -29,7 +29,18 @@ $getTip = json_decode(file_get_contents('data/6_GetTip.txt'), true);
   <title>FX Signal</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
-
+  <link rel="manifest" href="/manifest.json">
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+  <script>
+      var OneSignal = window.OneSignal || [];
+      OneSignal.push(["init", {
+          appId: "0e1b1aab-51f7-473c-96fc-fe1e5ccd6b15",
+          autoRegister: false,
+          notifyButton: {
+              enable: true /* Set to false to hide */
+          }
+      }]);
+  </script>
 </head>
 <body>
 <div class="container-fluid">
