@@ -2,8 +2,12 @@
 require_once('rest.inc.php');
 require_once('func.inc.php');
 
+$numOfOrder = file_get_contents('data/7_NumOfOrder.txt');
 if (isset($_REQUEST['numOfOrder'])) {
   $tmp = $_REQUEST['numOfOrder'] ? $_REQUEST['numOfOrder'] : 0;
+  if ($tmp < $numOfOrder) {
+    file_put_contents('data/8_IsCloseOrder.txt', 1);
+  }
   file_put_contents('data/7_NumOfOrder.txt', $tmp);
   exit;
 }

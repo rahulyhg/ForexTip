@@ -14,6 +14,12 @@ function sendMessage($numOfOrder)
     'contents' => $content
   );
 
+  $tmp = file_get_contents('data/8_IsCloseOrder.txt', 1);
+  if ($tmp) {
+    file_put_contents('data/8_IsCloseOrder.txt', '');
+    $fields['chrome_web_icon'] = 'https://irp-cdn.multiscreensite.com/1cbf2bcb/dms3rep/multi/desktop/money-logo-png-money-256x256.jpg.png';
+  }
+
   $fields = json_encode($fields);
   print("\nJSON sent:\n");
   print($fields);
