@@ -13,11 +13,16 @@ function sendMessage($numOfOrder)
     'data' => array("foo" => "bar"),
     'contents' => $content
   );
+  $fields['chrome_web_icon'] = 'http://www.freepngimg.com/download/ok/6-2-ok-png-hd.png';
 
   $tmp = file_get_contents('data/8_IsCloseOrder.txt');
   if ($tmp) {
     file_put_contents('data/8_IsCloseOrder.txt', '');
     $fields['chrome_web_icon'] = 'https://irp-cdn.multiscreensite.com/1cbf2bcb/dms3rep/multi/desktop/money-logo-png-money-256x256.jpg.png';
+  }
+
+  if ($_GET['floatingProfit'] > 1000) {
+    $fields['chrome_web_icon'] = 'https://images.vexels.com/media/users/3/130014/isolated/lists/3a93b4202dc70070d1d6a87f656bb267-danger-sign.png';
   }
 
   $fields = json_encode($fields);
