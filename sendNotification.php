@@ -21,7 +21,7 @@ function sendMessage($numOfOrder)
     $fields['chrome_web_icon'] = 'https://irp-cdn.multiscreensite.com/1cbf2bcb/dms3rep/multi/desktop/money-logo-png-money-256x256.jpg.png';
   }
 
-  if ($_GET['floatingProfit'] > 1000) {
+  if ($_GET['floatingProfit'] < -1000) {
     $fields['chrome_web_icon'] = 'https://images.vexels.com/media/users/3/130014/isolated/lists/3a93b4202dc70070d1d6a87f656bb267-danger-sign.png';
   }
 
