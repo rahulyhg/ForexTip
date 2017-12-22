@@ -102,7 +102,7 @@ function zipDataByCurrency()
         $totalPriceByType += ($order['stdLotds'] * $order['entryRate']);
         $pipMultiplier = $order['pipMultiplier'];
       }
-      if ($totalLotByType < 1) continue;
+      // if ($totalLotByType < 1) continue;
       $averagePrice = ($totalPriceByType / $totalLotByType);
       $averagePrice = number_format($averagePrice, strlen($pipMultiplier));
       $floatingPips = ($currentPrice[$currency]['price'] - $averagePrice) * $pipMultiplier;
