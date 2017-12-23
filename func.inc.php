@@ -3,7 +3,7 @@
 function getTop20Id()
 {
   $url = 'https://www.zulutrade.com/zulutrade-client/v2/api/providers/performance/search';
-  $dataJson = '{"timeFrame":10000,"minPips":0.1,"tradingExotics":false,"minWinTradesPercentage":80,"sortBy":"amountFollowing","sortAsc":false,"size":20,"page":0,"flavor":"global"}';
+  $dataJson = '{"timeFrame":10000,"minPips":0.1,"tradingExotics":false,"minWeeks":36,"minWinTradesPercentage":80,"sortBy":"amountFollowing","sortAsc":false,"size":50,"page":0,"flavor":"global"}';
   $top20Obj = RestCurl::post($url, $dataJson);
   $top20Data = $top20Obj['data']->result;
   $top20IdArray = [];
