@@ -128,6 +128,7 @@ function getTip()
   foreach ($zipDataByCurrency as $currency => $dataObj) {
     foreach ($dataObj as $type => $data) {
       if (!$tmp || ($tmp['floatingPips'] > $data['floatingPips'])) {
+		if ($data['stdLotds'] <= 1) continue;
         $tmp['currency'] = $currency;
         $tmp['tradeType'] = $type;
         $tmp['stdLotds'] = $data['stdLotds'];
